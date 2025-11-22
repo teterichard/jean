@@ -18,7 +18,7 @@ public class Documento {
         String textoNomralizado = normalizarTexto(textoBruto);
 
         String[] tokens = tokenize(textoNomralizado);
-        println("Tokens gerados: " + tokens.length);
+        // println("Tokens gerados: " + tokens.length);
 
         for (String t : tokens){
             if (t.isBlank()) continue;

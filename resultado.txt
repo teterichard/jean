@@ -4,8 +4,14 @@ Total de pares comparados: 3
 Função hash utilizada: hashMultiplicativo
 Métrica de similaridade: Cosseno
 
-TOP 5 resultados:
---------------------------------------
+Pares com similaridade >= 0.2:
+---------------------------------
+doc1.txt <-> doc2.txt = 0.9999999999999998
+
+Pares com menor similaridade:
+---------------------------------
+doc1.txt <-> doc3.txt = 0.0
+doc3.txt <-> doc2.txt = 0.0
 
 === ROTAÇÕES DA AVL ===
 Simples Direita: 0

@@ -45,8 +45,9 @@ public class Main {
             Documento doc1 = null, doc2 = null;
 
             for (Documento d : documentos) {
-                if (d.getNome().equals(d1)) doc1 = d;
-                if (d.getNome().equals(d2)) doc2 = d;
+                String nomeBase = new File(d.getNome()).getName();
+                if (nomeBase.equals(d1)) doc1 = d;
+                if (nomeBase.equals(d2)) doc2 = d;
             }
 
             if (doc1 == null || doc2 == null) {
@@ -91,10 +92,29 @@ public class Main {
 
         if (modo.equalsIgnoreCase("lista")) {
 
-            sb.append("Pares com similaridade acima de ").append(limiar).append(":\n");
-            sb.append("--------------------------------------\n");
+            sb.append("Pares com similaridade >= ").append(limiar).append(":\n");
+            sb.append("---------------------------------\n");
 
-            listarAcimaDoLimiar(arvore, limiar, sb);
+            int count = contarAcimaRec(arvore.raiz, limiar);
+            if (count == 0) {
+                sb.append("Nenhum par com similaridade >= limiar.\n");
+            } else {
+                listarAcimaDoLimiar(arvore, limiar, sb);
+            }
+
+            // Seção com menor similaridade
+            AVLNode min = getMinNode(arvore.raiz);
+            sb.append("\n");
+            sb.append("Pares com menor similaridade:\n");
+            sb.append("---------------------------------\n");
+            if (min == null) {
+                sb.append("Nenhum par disponível.\n");
+            } else {
+                for (Resultado r : min.resultados) {
+                    sb.append(formatResultado(r)).append("\n");
+                }
+            }
+
         }
 
         else if (modo.equalsIgnoreCase("topK")) {
@@ -112,11 +132,16 @@ public class Main {
             sb.append("TOP ").append(K).append(" resultados:\n");
             sb.append("--------------------------------------\n");
 
+            int printed = 0;
             for (int i = 0; i < Math.min(K, top.size()); i++) {
                 Resultado r = top.get(i);
                 if (r.similaridade >= limiar) {
-                    sb.append(r).append("\n");
+                    sb.append(formatResultado(r)).append("\n");
+                    printed++;
                 }
+            }
+            if (printed == 0) {
+                sb.append("Nenhum resultado acima do limiar.\n");
             }
         }
 
@@ -158,7 +183,7 @@ public class Main {
 
         if (no.chave >= limiar) {
             for (Resultado r : no.resultados) {
-                sb.append(r).append("\n");
+                sb.append(formatResultado(r)).append("\n");
             }
         }
 
@@ -179,6 +204,33 @@ public class Main {
         lista.addAll(no.resultados);
 
         coletar(no.dir, lista);
+    }
+
+    private static int contarAcimaRec(AVLNode no, double limiar) {
+        if (no == null) return 0;
+
+        int count = contarAcimaRec(no.esq, limiar);
+
+        if (no.chave >= limiar) {
+            count += no.resultados.size();
+        }
+
+        count += contarAcimaRec(no.dir, limiar);
+
+        return count;
+    }
+
+    private static AVLNode getMinNode(AVLNode no) {
+        if (no == null) return null;
+        AVLNode current = no;
+        while (current.esq != null) current = current.esq;
+        return current;
+    }
+
+    private static String formatResultado(Resultado r) {
+        String a = new File(r.getDoc1()).getName();
+        String b = new File(r.getDoc2()).getName();
+        return a + " <-> " + b + " = " + r.getSimilaridade();
     }
 
     private static void salvarEmArquivo(String conteudo) {
