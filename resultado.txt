@@ -1,0 +1,14 @@
+=== VERIFICADOR DE SIMILARIDADE DE TEXTOS ===
+Total de documentos processados: 3
+Total de pares comparados: 3
+Função hash utilizada: hashMultiplicativo
+Métrica de similaridade: Cosseno
+
+TOP 5 resultados:
+--------------------------------------
+
+=== ROTAÇÕES DA AVL ===
+Simples Direita: 0
+Simples Esquerda: 0
+Dupla Direita: 0
+Dupla Esquerda: 0

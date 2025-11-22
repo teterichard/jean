@@ -1,0 +1,346 @@
+Projeto Pr´atico 2 de Estrutura de Dados II
+Verificador de Similaridade de Textos com Hash e AVL
+Prof. Dr. Jean M. Laine
+2025/2
+Objetivo Geral
+Desenvolver um sistema capaz de identificar o grau de similaridade entre documentos textuais,
+uma tarefa fundamental em diversas ´areas da computa¸c˜ao, como a detec¸c˜ao de pl´agio
+acadˆemico, a recomenda¸c˜ao de not´ıcias, a organiza¸c˜ao de grandes volumes de
+documentos e a otimiza¸c˜ao de motores de busca.
+Para isso, o projeto deve integrar conceitos de estruturas de dados avan¸cadas, como
+tabelas hash e ´arvores AVL, aplicando-as de forma eficiente para resolver um problema
+real de an´alise de textos e detec¸c˜ao de similaridades.
+Objetivos Espec´ıficos
+ Implementar uma tabela hash para armazenar e representar os documentos processados.
+ Implementar uma ´arvore AVL para manter ordenados os pares de documentos por grau
+de similaridade.
+ Aplicar e comparar diferentes estrat´egias de dispers˜ao e balanceamento.
+ Analisar experimentalmente o desempenho das estruturas implementadas.
+Descri¸c˜ao do Problema
+Cada documento deve ser lido a partir de um arquivo de texto e processado para gerar
+um vocabul´ario significativo. Este processamento, conhecido como normaliza¸c˜ao de
+texto, ´e obrigat´orio e deve incluir, no m´ınimo, os seguintes passos:
+ Converter todo o texto para letras min´usculas.
+ Remover toda pontua¸c˜ao e caracteres n˜ao-alfanum´ericos.
+ Realizar a tokeniza¸c˜ao (separa¸c˜ao do texto em palavras ou ”tokens”).
+1
+ Remover ”stop words”(palavras comuns como ’a’, ’o’, ’de’, ’em’, ’para’, etc.)
+a partir de uma lista pr´e-definida para o portuguˆes.
+Ap´os a normaliza¸c˜ao, o sistema deve ser capaz de:
+ Ler m´ultiplos documentos.
+ Armazenar as palavras e suas frequˆencias em uma tabela hash para cada documento.
+Requisitos T´ecnicos
+ A tabela hash deve ser implementada manualmente (sem uso de bibliotecas prontas).
+ A fun¸c˜ao de dispers˜ao deve ser definida e justificada pelo aluno. O aluno dever´a
+implementar duas fun¸c˜oes de dispers˜ao distintas para fins de compara¸c˜ao no
+relat´orio t´ecnico.
+ A ´arvore AVL deve armazenar a similaridade como chave. Aten¸c˜ao: ´e comum que
+m´ultiplos pares de documentos resultem no mesmo valor de similaridade.
+Para tratar corretamente este caso, cada n´o da ´arvore deve ser capaz de armazenar
+uma lista de pares de documentos associada `aquela chave, em vez de um ´unico par.
+ A implementa¸c˜ao do m´etodo de inser¸c˜ao na Arvore AVL deve ser modificada para ´
+retornar um registro ou estrutura de dados que quantifique as rota¸c˜oes
+(Simples Esquerda/Direita, Dupla Esquerda/Direita) realizadas durante a opera¸c˜ao.
+ O c´alculo de similaridade deve ser baseado em uma m´etrica escolhida e justificada pelo
+aluno (exemplo: Cosseno, Jaccard, Dice, etc.).
+Exemplo Ilustrativo (N˜ao Vinculante)
+O exemplo a seguir tem fins apenas did´aticos e serve para ilustrar o conceito geral do projeto.
+O formato exato das estruturas, dos c´alculos e do c´odigo deve ser definido pelo aluno.
+Documentos de Exemplo
+doc1.txt: "estrutura de dados ´e essencial em ci^encia da computa¸c~ao"
+doc2.txt: "dados estruturados s~ao essenciais para a ci^encia"
+Ap´os tokeniza¸c˜ao e remo¸c˜ao de palavras irrelevantes:
+doc1  { "estrutura":1, "dados":1, "essencial":1, "ci^encia":1, "computa¸c~ao":1 }
+doc2  { "dados":1, "estruturados":1, "essenciais":1, "ci^encia":1 }
+2
+C´alculo de Similaridade (Exemplo Conceitual)
+A similaridade entre os dois documentos pode ser estimada com base na sobreposi¸c˜ao dos
+termos, utilizando uma m´etrica como Cosseno, Jaccard ou Dice. Por exemplo, uma similaridade de 0.45 indicaria sobreposi¸c˜ao parcial entre os vocabul´arios — sugerindo que os textos
+tratam de um mesmo tema, mas n˜ao s˜ao c´opias.
+Uso da AVL
+Ap´os calcular as similaridades entre todos os pares de documentos, o sistema deve armazenar
+os resultados em uma ´arvore AVL ordenada pela similaridade.
+0.78
+/ \
+0.45 0.90
+/
+0.30
+Cada n´o pode conter uma lista de pares de documentos com a pontua¸c˜ao de similaridade,
+permitindo consultas eficientes.
+Observa¸c˜ao: O exemplo ´e apenas ilustrativo; o aluno deve adaptar e justificar todas as
+decis˜oes de representa¸c˜ao, c´alculo e balanceamento.
+Relat´orio T´ecnico Obrigat´orio
+O relat´orio deve seguir a estrutura abaixo. As respostas para as quest˜oes de an´alise devem ser
+integradas de forma coesa dentro das se¸c˜oes indicadas, evitando um formato de question´ario.
+1. Introdu¸c˜ao: Contextualiza¸c˜ao sobre o problema de compara¸c˜ao de textos, a relevˆancia
+da detec¸c˜ao de similaridade e os objetivos do trabalho.
+2. Metodologia: Explica¸c˜ao detalhada das estruturas de dados e algoritmos utilizados.
+ Descri¸c˜ao da Tabela Hash implementada, incluindo as duas fun¸c˜oes de dispers˜ao escolhidas e a estrat´egia de tratamento de colis˜oes.
+ Descri¸c˜ao da Arvore AVL, com foco na l´ogica de balanceamento, nas rota¸c˜oes e ´
+na forma como a contagem de rota¸c˜oes foi implementada.
+ Justificativa para a escolha da m´etrica de similaridade (Cosseno, Jaccard, etc.).
+3. Descri¸c˜ao do Algoritmo: Apresenta¸c˜ao do funcionamento geral do sistema, o fluxo
+de dados e, se necess´ario, pseudoc´odigos dos algoritmos mais complexos (ex: inser¸c˜ao
+na AVL).
+4. An´alise Experimental: Apresenta¸c˜ao e discuss˜ao dos testes de desempenho realizados.
+3
+ Gr´aficos e tabelas mostrando o tempo m´edio de execu¸c˜ao com diferentes volumes
+de documentos.
+ Compara¸c˜ao de desempenho da busca na AVL com uma estrutura mais simples
+(ex: busca em lista ordenada).
+ Nesta se¸c˜ao, responda obrigatoriamente:
+– Apresente um gr´afico ou tabela comparando a distribui¸c˜ao de chaves (ex: colis˜oes por bucket) para as duas fun¸c˜oes de hash implementadas. Discuta
+qual foi mais eficaz para o seu conjunto de dados.
+– Apresente os dados coletados sobre o n´umero de rota¸c˜oes (simples e duplas) durante a inser¸c˜ao dos resultados na AVL. Discuta o que esses n´umeros
+indicam sobre a ordem de inser¸c˜ao dos dados.
+5. Resultados e Discuss˜ao: An´alise dos resultados de similaridade obtidos e interpreta¸c˜ao cr´ıtica dos mesmos.
+ Apresenta¸c˜ao dos pares de documentos com maior similaridade encontrados em
+seus testes.
+ Nesta se¸c˜ao, discuta obrigatoriamente:
+– Qual seria o impacto (em termos de complexidade e adequa¸c˜ao ao problema)
+de substituir a Arvore AVL por outra estrutura, como uma ´ heap?
+– Como as etapas de pr´e-processamento de texto (normaliza¸c˜ao, remo¸c˜ao de
+stop words, etc.) ajudaram a evitar falsos positivos de similaridade? Que
+outros passos poderiam ser tomados?
+6. Conclus˜oes: Considera¸c˜oes finais sobre o projeto, o aprendizado obtido e poss´ıveis
+melhorias futuras.
+ Nesta se¸c˜ao, reflita obrigatoriamente sobre:
+– Quais foram os principais desafios t´ecnicos e conceituais encontrados ao implementar a fun¸c˜ao hash e o balanceamento da Arvore AVL? ´
+– Descreva em detalhes o bug mais desafiador que vocˆe encontrou durante a
+implementa¸c˜ao. Explique qual era o sintoma do erro, como vocˆe investigou a
+causa e qual foi a solu¸c˜ao aplicada ao c´odigo.
+Crit´erios de Avalia¸c˜ao
+ Implementa¸c˜ao correta e funcional das estruturas.
+ Clareza e coerˆencia do relat´orio t´ecnico.
+ Originalidade das respostas e an´alises.
+ Testes de desempenho e profundidade das discuss˜oes.
+ Evidˆencias de autoria e dom´ınio do conte´udo.
+4
+Penaliza¸c˜oes:
+ Projeto copiado ou gerado automaticamente sem explica¸c˜ao: nota 0.
+ Programa que n˜ao compila ou n˜ao executa: nota 0.
+ Relat´orio sem referˆencias, prints ou respostas anal´ıticas: at´e -2 pontos.
+ Entrega fora do formato especificado: -1 ponto.
+Execu¸c˜ao e Testes Automatizados
+O programa deve ser execut´avel via linha de comando (terminal) e aceitar os seguintes formatos:
+java Main <diretorio_documentos> <limiar> <modo> [argumentos_opcionais]
+onde:
+ <diretorio documentos> — caminho da pasta contendo os arquivos de texto (ex:
+./documentos/);
+ <limiar> — valor entre 0 e 1 indicando o n´ıvel m´ınimo de similaridade a ser exibido;
+ <modo> — define o comportamento do programa:
+– lista — exibe todos os pares com similaridade acima do limiar;
+– topK — exibe apenas os K pares mais semelhantes (o valor de K deve ser informado
+ap´os o modo);
+– busca — compara dois arquivos espec´ıficos, informados nos argumentos seguintes.
+Exemplos de Execu¸c˜ao
+Modo lista:
+java Main ./documentos 0.75 lista
+Modo topK:
+java Main ./documentos 0.8 topK 5
+Modo busca:
+java Main ./documentos 0.0 busca doc1.txt doc4.txt
+5
+Neste ´ultimo modo, o valor do limiar pode ser 0.0, pois ser´a ignorado. O programa deve
+exibir apenas a similaridade entre os dois documentos especificados.
+Sa´ıda esperada:
+=== VERIFICADOR DE SIMILARIDADE DE TEXTOS ===
+Comparando: doc1.txt <-> doc4.txt
+Similaridade calculada: 0.67
+M´etrica utilizada: Cosseno
+Formato de Sa´ıda Esperado
+A sa´ıda padr˜ao deve ser exibida no terminal e tamb´em gravada em um arquivo de log
+(resultado.txt) no mesmo diret´orio de execu¸c˜ao. O formato da sa´ıda deve seguir o modelo
+abaixo:
+=== VERIFICADOR DE SIMILARIDADE DE TEXTOS ===
+Total de documentos processados: 5
+Total de pares comparados: 10
+Fun¸c~ao hash utilizada: hashMultiplicativo
+M´etrica de similaridade: Cosseno
+Pares com similaridade >= 0.75:
+---------------------------------
+doc1.txt <-> doc2.txt = 0.82
+doc3.txt <-> doc4.txt = 0.79
+Pares com menor similaridade:
+---------------------------------
+doc1.txt <-> doc5.txt = 0.12
+Requisitos obrigat´orios:
+ O programa deve aceitar argumentos pela linha de comando sem intera¸c˜ao manual.
+ Todos os resultados devem ser impressos no terminal e gravados em arquivo.
+ O nome do arquivo de sa´ıda deve ser sempre resultado.txt.
+ O programa deve funcionar em ambiente padr˜ao (JDK 17 ou superior).
+6
+Arquitetura Recomendada
+Para promover um design de software modular e de f´acil manuten¸c˜ao, recomenda-se que
+o projeto seja estruturado nas seguintes classes. A descri¸c˜ao abaixo detalha as principais
+responsabilidades de cada uma.
+ Main
+– Responsabilidade Principal: Orquestrar a execu¸c˜ao completa do programa.
+– Detalhes: Esta classe deve ser o ponto de entrada do sistema. Suas tarefas
+incluem: ler e validar os argumentos da linha de comando, coordenar a leitura dos
+arquivos, instanciar os objetos Documento, disparar o processo de compara¸c˜ao de
+todos os pares, inserir os resultados na ´arvore AVL e, por fim, invocar os m´etodos
+para exibir os resultados no terminal e grav´a-los no arquivo resultado.txt.
+ Documento
+– Responsabilidade Principal: Representar um ´unico arquivo de texto e seu
+conte´udo processado.
+– Detalhes: Recomenda-se que esta classe encapsule toda a l´ogica de processamento
+de um ´unico arquivo. Ela deve conter atributos como o nome do arquivo e sua
+pr´opria Tabela Hash interna para mapear cada palavra ´unica `a sua frequˆencia.
+Seus m´etodos devem realizar a leitura do arquivo, a normaliza¸c˜ao do texto e
+popular a tabela hash.
+ HashTable
+– Responsabilidade Principal: Implementa¸c˜ao manual de uma tabela hash gen´erica.
+– Detalhes: Deve ser uma implementa¸c˜ao do zero, sem usar o HashMap do Java.
+A classe deve gerenciar um array interno e as duas fun¸c˜oes de dispers˜ao
+(hash) criadas pelo aluno. M´etodos essenciais incluem put(chave, valor) e
+get(chave). O tratamento de colis˜oes ´e uma parte cr´ıtica desta implementa¸c˜ao.
+ AVLTree
+– Responsabilidade Principal: Implementa¸c˜ao manual de uma ´arvore AVL.
+– Detalhes: A chave de cada n´o ser´a a similaridade (double), e o valor armazenado
+ser´a uma lista de objetos Resultado. A implementa¸c˜ao deve conter a l´ogica de
+inser¸c˜ao que calcula o fator de balanceamento e realiza as rota¸c˜oes simples e
+duplas. O m´etodo de inser¸c˜ao deve ser modificado para permitir a contagem
+de rota¸c˜oes. A classe deve prover m´etodos de travessia para listar os pares
+ordenadamente.
+ ComparadorDeDocumentos
+– Responsabilidade Principal: Isolar a l´ogica de c´alculo de similaridade.
+7
+– Detalhes: Esta classe deve conter um ou mais m´etodos est´aticos ou de instˆancia
+que recebem dois objetos Documento como entrada e retornam um double representando a similaridade entre eles. E aqui que a m´etrica escolhida (Cosseno, ´
+Jaccard, etc.) ser´a implementada. Separar essa l´ogica facilita testes e futuras
+extens˜oes (ex: adicionar novas m´etricas).
+ Resultado
+– Responsabilidade Principal: Estrutura de dados simples para armazenar o
+resultado de uma compara¸c˜ao.
+– Detalhes: Uma classe simples, similar a uma struct, contendo apenas atributos
+para guardar os nomes dos dois documentos comparados e o valor da similaridade
+calculada. Objetos desta classe ser˜ao armazenados nas listas dentro dos n´os da
+´arvore AVL.
+Testes Automatizados pelo Professor
+Durante a corre¸c˜ao, o professor executar´a o programa com diferentes conjuntos de testes
+(documentos e limiares). O aluno deve garantir que:
+ O programa compile e execute corretamente com o comando:
+javac *.java && java Main ./documentos 0.7 lista
+ Todos os arquivos de teste sejam processados sem necessidade de ajustes no c´odigo.
+ As sa´ıdas sejam consistentes e apresentem formata¸c˜ao semelhante ao modelo acima.
+O n˜ao cumprimento dessas regras poder´a resultar em descontos na nota ou desclassifica¸c˜ao
+do projeto. Dica: antes da entrega, o aluno pode testar seu programa usando scripts de
+automa¸c˜ao (.sh ou .bat) com diferentes parˆametros para garantir robustez.
+Entrega
+ O trabalho deve ser entregue via plataforma oficial da disciplina, em um ´unico arquivo
+compactado (.zip) contendo:
+– C´odigo-fonte completo;
+– Relat´orio em PDF;
+– Pasta documentos/ com os textos usados nos testes.
+ Nenhum outro meio de envio ser´a aceito.
+8
+Extens˜oes Opcionais
+Aviso: As extens˜oes a seguir s˜ao totalmente opcionais e servem para alunos que desejam
+aprofundar seus conhecimentos. Recomenda-se fortemente que os alunos s´o iniciem qualquer
+um desses itens ap´os terem uma vers˜ao completa, funcional e testada de todos os requisitos
+obrigat´orios do projeto.
+ Suporte a diferentes idiomas
+,→ Adapte o sistema para que ele possa processar textos em outros idiomas (como
+inglˆes ou espanhol), permitindo, por exemplo, que o usu´ario especifique qual lista
+de stop words deve ser utilizada.
+ Implementa¸c˜ao de TF-IDF
+,→ Substitua a contagem de frequˆencia simples pela m´etrica TF-IDF (Term FrequencyInverse Document Frequency). Isso resultar´a em uma an´alise de similaridade mais
+sofisticada, que valoriza palavras que s˜ao importantes para um documento, mas
+raras na cole¸c˜ao geral. (Understanding TF-IDF for machine learning)
+ Exporta¸c˜ao dos resultados em formato CSV ou PDF
+,→ Al´em do arquivo resultado.txt, permita que o programa gere um arquivo
+resultados.csv (valores separados por v´ırgula), que pode ser facilmente importado em planilhas para an´alise de dados. A exporta¸c˜ao para PDF ´e uma alternativa
+mais complexa.
+ Visualiza¸c˜ao da AVL gerada
+,→ Crie uma funcionalidade que gere uma representa¸c˜ao visual da ´arvore AVL final.
+Isso pode ser feito gerando um arquivo no formato DOT (para ser lido por ferramentas como o Graphviz) ou imprimindo uma estrutura em formato de texto no
+console, ajudando a entender o balanceamento da ´arvore.
+Normas para Realiza¸c˜ao e Entrega
+Para a organiza¸c˜ao e avalia¸c˜ao deste trabalho, sigam atentamente as seguintes normas:
+ Grupos: O trabalho poder´a ser realizado em grupos de 2 at´e 3 (trˆes) alunos. N˜ao
+ser˜ao aceitos trabalhos individuais.
+ Apresenta¸c˜ao Obrigat´oria: A apresenta¸c˜ao do trabalho ´e obrigat´oria para a atribui¸c˜ao da nota. Todos os integrantes do grupo devem estar presentes e aptos a explicar
+qualquer parte do c´odigo e dos conceitos aplicados. A ausˆencia de qualquer integrante
+no momento da apresenta¸c˜ao acarretar´a nota zero no projeto para o aluno ausente.
+ Durante a apresenta¸c˜ao, cada aluno deve demonstrar dom´ınio sobre o c´odigo-fonte,
+sendo capaz de:
+9
+– Explicar a l´ogica de funcionamento de qualquer parte da implementa¸c˜ao;
+– Justificar as decis˜oes de estrutura e algoritmo utilizadas;
+– Realizar pequenas altera¸c˜oes ou corre¸c˜oes solicitadas pelo professor no momento
+da apresenta¸c˜ao, como forma de verifica¸c˜ao de autoria.
+ Caso o aluno ou o grupo n˜ao demonstre compreens˜ao adequada sobre o funcionamento
+do c´odigo, ou revele desconhecimento sobre a implementa¸c˜ao, o projeto ser´a anulado e
+receber´a nota zero.
+ Identifica¸c˜ao no C´odigo: O nome completo e o RA de todos os integrantes do grupo
+devem constar em um bloco de coment´arios no cabe¸calho do arquivo de c´odigofonte principal (Main.java).
+ Documenta¸c˜ao: O c´odigo-fonte deve ser claro e bem documentado com coment´arios, explicando as partes mais importantes da sua l´ogica, especialmente as
+se¸c˜oes que tratam da fun¸c˜ao de dispers˜ao, tratamento de colis˜oes e das rota¸c˜oes
+da ´arvore AVL.
+ Submiss˜ao da Tarefa: A entrega do projeto (arquivos .java) deve ser realizada
+por apenas um integrante do grupo na plataforma online da disciplina. Envios por
+outros meios n˜ao ser˜ao considerados v´alidos.
+ Pl´agio: O trabalho deve ser integralmente desenvolvido pelo grupo. Casos de pl´agio
+ou uso n˜ao autorizado de ferramentas autom´aticas resultar˜ao em nota zero e poder˜ao
+ensejar encaminhamento `a coordena¸c˜ao.
+Orienta¸c˜oes sobre o Uso de Ferramentas de Inteligˆencia
+Artificial (LLMs)
+Ferramentas de Inteligˆencia Artificial generativa (como ChatGPT, Copilot, Gemini, entre
+outras) podem ser recursos ´uteis para estudo, esclarecimento de d´uvidas e aprimoramento do
+racioc´ınio l´ogico e t´ecnico, desde que utilizadas de forma ´etica e consciente. Nas atividades
+desta disciplina, o uso dessas ferramentas deve apoiar o aprendizado, e n˜ao substituir o
+trabalho autoral do estudante. O objetivo ´e que o aluno compreenda, projete e implemente
+as solu¸c˜oes por conta pr´opria.
+E permitido: ´
+ Utilizar LLMs para revisar conceitos te´oricos (ex.: “o que ´e uma ´arvore AVL?”);
+ Pedir explica¸c˜oes ou exemplos gen´ericos para compreender um tema;
+ Consultar sobre boas pr´aticas de programa¸c˜ao ou conven¸c˜oes de c´odigo;
+ Obter ajuda para depurar (debugar ) erros ap´os tentativa pr´evia de resolu¸c˜ao;
+ Discutir ideias e caminhos poss´ıveis, sem solicitar o c´odigo completo da solu¸c˜ao.
+10
+N˜ao ´e permitido:
+ Solicitar `a IA que resolva ou implemente diretamente a atividade ou o projeto;
+ Submeter c´odigos, textos ou relat´orios gerados parcial ou totalmente pela IA sem autoria clara;
+ Entregar solu¸c˜oes que o aluno n˜ao saiba explicar, justificar ou modificar durante a
+avalia¸c˜ao;
+ Utilizar a IA para traduzir automaticamente instru¸c˜oes e gerar c´odigo sem compreender
+seu funcionamento.
+Importante: A utiliza¸c˜ao de c´odigos prontos, trechos obtidos de terceiros ou gerados por
+ferramentas de Inteligˆencia Artificial (LLMs, como ChatGPT, Copilot, Gemini, etc.), sem o
+devido entendimento e autoria, configura fraude acadˆemica.
+Referˆencias Bibliogr´aficas Sugeridas
+Para aprofundar os conceitos te´oricos e pr´aticos necess´arios para a realiza¸c˜ao deste projeto,
+recomenda-se fortemente a consulta das seguintes obras de referˆencia. Elas fornecem a base
+para a implementa¸c˜ao das estruturas de dados, o c´alculo de similaridade e a an´alise de
+algoritmos.
+Estruturas de Dados e Algoritmos (Base Te´orica)
+ CORMEN, T. H.; LEISERSON, C. E.; RIVEST, R. L.; STEIN, C. Algoritmos: Teoria e Pr´atica. 3ª Edi¸c˜ao, Editora Campus/Elsevier, 2012.
+,→ Considerada a principal referˆencia na ´area. Essencial para o estudo aprofundado
+de tabelas hash, ´arvores rubro-negras (conceitualmente pr´oximas das AVLs) e,
+principalmente, para a an´alise de complexidade de algoritmos exigida no relat´orio.
+ SEDGEWICK, R.; WAYNE, K. Algorithms. 4th Edition, Addison-Wesley Professional, 2011.
+,→ Obra famosa por sua abordagem pr´atica e did´atica, com exemplos de implementa¸c˜ao claros e diretos, muitos dos quais dispon´ıveis em Java. Excelente para
+guiar a implementa¸c˜ao da Tabela Hash e da Arvore de Busca Bin´aria. ´
+ GOODRICH, M. T.; TAMASSIA, R.; GOLDWASSER, M. H. Data Structures and Algorithms in Java. 6th Edition, Wiley, 2014.
+,→ Um livro focado especificamente na implementa¸c˜ao das estruturas de dados utilizando a linguagem Java. E um guia pr´atico perfeito para este projeto, cobrindo ´
+em detalhes a implementa¸c˜ao de ´arvores AVL e tabelas hash.
+11
+Recupera¸c˜ao de Informa¸c˜ao e Processamento de Texto
+ MANNING, C. D.; RAGHAVAN, P.; SCHUTZE, H. ¨ Introduction to Information Retrieval. Cambridge University Press, 2008.
+,→ A referˆencia definitiva para entender a parte de similaridade de textos. Cobre em
+detalhes o modelo de espa¸co vetorial, normaliza¸c˜ao de texto (tokeniza¸c˜ao, stop
+words) e m´etricas como a similaridade de cosseno. O cap´ıtulo 6 ´e particularmente
+relevante.
+ JURAFSKY, D.; MARTIN, J. H. Speech and Language Processing. 3rd
+Edition, Prentice Hall, 2020.
+,→ Uma obra mais ampla sobre Processamento de Linguagem Natural que fornece um
+contexto robusto para as t´ecnicas de pr´e-processamento e representa¸c˜ao de texto
+utilizadas no projeto.
+Boas Pr´aticas de Programa¸c˜ao em Java
+ BLOCH, J. Java Efetivo: as Melhores Pr´aticas Para a Plataforma Java.
+3ª Edi¸c˜ao, Editora Alta Books, 2019.
+,→ Leitura opcional, mas altamente recomendada para os alunos que desejam n˜ao
+apenas entregar um c´odigo funcional, mas um c´odigo de alta qualidade. Oferece conselhos pr´aticos sobre como escrever software robusto, eficiente e de f´acil
+manuten¸c˜ao em Java.
+12

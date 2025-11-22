@@ -1,0 +1,1 @@
+A computação depende de estruturas e organização de dados.
